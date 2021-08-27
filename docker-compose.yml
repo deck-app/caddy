@@ -1,7 +1,8 @@
 version: "3"
 services:
   caddy:
-    build: ''./caddy'
+    build: 
+      context: './caddy'
     volumes:
       - '${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}'
       - '${CADDY_CONFIG_PATH}:/etc/caddy'
