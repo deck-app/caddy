@@ -92,6 +92,4 @@ services:
       - 'DOCKER_TLS_CERTDIR=/certs'
       - 'DOCKER_CERT_PATH=/certs/client'
       - 'FAKETIME=${PHP_FPM_FAKETIME}'
-volumes:
-  caddy:
-    driver: '${VOLUMES_DRIVER}'
+volumes: {}
