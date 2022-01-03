@@ -1,19 +1,31 @@
-name: redis
+name: Publish Docker Image
 
 on:
   push:
     branches: [ v4 ]
-  pull_request:
-    branches: [ v4 ]
-
+env:
+  IMAGE_NAME: caddy
+  VERSION: v2.3
 jobs:
-
-  build:
-
+  buildImage:
+    name: Build Docker Image
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker-compose build
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@master
+        with:
+          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@master
+        with:
+          driver-opts: image=moby/buildkit:master
       
+      - name: log into GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN}}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - uses: actions/checkout@v2
+      - name: Build Container image
+        run: docker buildx build --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x --tag ghcr.io/deck-app/caddy:v2.3 .
