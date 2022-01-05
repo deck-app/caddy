@@ -2,7 +2,7 @@ name: Publish Docker Image
 
 on:
   push:
-    branches: [ v4 ]
+    branches: [ master ]
 env:
   IMAGE_NAME: caddy
   VERSION: v2.3

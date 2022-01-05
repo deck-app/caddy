@@ -1,5 +1,5 @@
 FROM alpine:3.14
-
+LABEL maintainer Naba Das <hello@get-deck.com>
 RUN apk add --no-cache ca-certificates mailcap
 
 RUN set -eux; \
