@@ -5,13 +5,9 @@ services:
       context: '.'
     ports:
       - '${CADDY_HOST_HTTP_PORT}:80'
-      - '${CADDY_HOST_HTTPS_PORT}:443'
-    
     volumes:
-      # - '${APP_CODE_PATH_HOST}/config:/config'
       - '${APP_CODE_PATH_HOST}/data:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}'
-      - '${APP_CODE_PATH_HOST}/srv:/srv'
-      - './Caddyfile:/etc/caddy/Caddyfile'
+      - '${APP_CODE_PATH_HOST}/srv:/srv'  
     expose:
       - '9000'
 volumes: {}
